@@ -1,6 +1,11 @@
 import pygame
 
 from window import Window
+from clearing import Clearing
+
+CLOCK_TICKS = 60
+CLEARING_X = 10
+CLEARING_Y = 10
 
 class Game:
     def __init__(this):
@@ -12,10 +17,12 @@ class Game:
         window = Window(1280, 720)
         window.setCaption("Journey of the Faerie Queen")
 
+        clearing = Clearing()
+
         playing = True
 
         while playing:
-            this._clock.tick(60)
+            this._clock.tick(CLOCK_TICKS)
 
             playing = not pygame.event.peek(pygame.QUIT)
 
@@ -25,6 +32,7 @@ class Game:
                 playing = not keys[pygame.K_ESCAPE]
 
                 if playing:
+                    window.display(clearing.render(), CLEARING_X, CLEARING_Y)
                     window.refresh()
 
             if not playing:
